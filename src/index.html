@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World!</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+</head>
+
+<body>
+  <div class="overlay">
+  </div>
+  <div class="content">
+    <div class="searchFeature">
+       <input class="searchFeatureInput" type="text" placeholder="Search widget">
+    </div>
+    <div class="widgetPannel">
+        <div class="widget clipboard">
+            <div class="clipSearchWrapper">
+               <input class="clipSearch" placeholder="Search in clipboard history" type="text">
+               <span class="add-clip">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+               </span>
+            </div>
+
+            <ul class="clips">
+                   <li>
+                    opacity: 0.2; background: black; width: 100vw; height: 100vh;
+                   </li>
+                   <li>
+                    grid-template-columns: auto auto auto auto auto auto;
+                    gap: 10px;
+                    grid-template-rows: repeat(auto-fill, 200px);
+                  </li>
+                  <li>
+                    position: fixed;
+                    top:0;
+                    left: 0;
+                  </li>
+                 </ul>
+            </div>
+
+            <div class="widget monaco" style="padding-top:25px;background: white;">
+              <div class="monaco-editor-container">
+          
+              </div>
+                  
+            </div>
+      </div>
+   
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
+  <script>
+    require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor@latest/min/vs' }});
+  
+    // Before loading vs/editor/editor.main, define a global MonacoEnvironment that overwrites
+    // the default worker url location (used when creating WebWorkers). The problem here is that
+    // HTML5 does not allow cross-domain web workers, so we need to proxy the instantiation of
+    // a web worker through a same-domain script
+    window.MonacoEnvironment = {
+      getWorkerUrl: function(workerId, label) {
+        return `data:text/javascript;charset=utf-8,${encodeURIComponent(`
+          self.MonacoEnvironment = {
+            baseUrl: 'https://unpkg.com/monaco-editor@latest/min/'
+          };
+          importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');`
+        )}`;
+      }
+    };
+  
+    require(["vs/editor/editor.main"], function () {
+      var editor = monaco.editor.create(document.querySelector('.monaco-editor-container'), {
+        value: `function x() {
+    console.log("Hello world!");
+  }`,
+        language: 'javascript',
+        theme: 'vs-light',
+      });
+      editor.layout({ width:905, height: 400 });
+    });
+  </script>
+</body>
+
+</html>

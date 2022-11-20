@@ -1,0 +1,99 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: auto;
+  max-width: 38rem;
+  padding: 2rem;
+}
+
+.overlay, .content{
+  position: fixed;
+  top:0;
+  left: 0;
+}
+.overlay{
+ /*background: rgba(0,0,0,0.8); width: 100vw; height: 100vh;*/
+ -webkit-backdrop-filter: blur(5px);
+ backdrop-filter: blur(5px);
+z-index: 1;
+}
+
+.content{
+  z-index: 2;
+  color: white;
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+}
+.searchFeature{
+  margin: 0 auto;
+  margin-top: 10vh;
+  width: 50%;
+  max-width: 600px;
+
+}
+
+.searchFeatureInput{
+  width: 100%;
+  border: none;
+  padding: 15px;
+  outline-width: 0;
+}
+
+.widgetPannel{
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  width: calc(100% - 40px);
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 90vh;
+  padding: 50px 20px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* auto auto auto auto auto auto;*/
+  gap: 10px;
+  grid-template-rows: repeat(auto-fill, 200px);
+}
+
+
+.clipboard{
+  grid-column: 1 / span 3;
+  grid-row: 1/3;
+  padding: 10px;
+  background: #EEEEF0
+}
+.monaco{
+  grid-column: 4 / span 12;
+  grid-row: 1/4;
+}
+
+.clips{
+  list-style-type: none;
+  padding: 0;
+}
+
+.clips li{
+  background: white;/*rgb(204, 204, 204);;*/
+  padding: 10px;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.clipSearchWrapper{
+  height: 30px;
+}
+
+.clipSearch{
+  padding: 5px;
+  width: calc(100% - 60px);
+  border: none;
+  height: 20px;
+  outline-width: 0;
+}
+
+.add-clip{
+    font-size: 25px;
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+    color: black;
+}
